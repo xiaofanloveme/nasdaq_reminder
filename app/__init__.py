@@ -1,0 +1,1 @@
+"""CleanSpark alert agent."""

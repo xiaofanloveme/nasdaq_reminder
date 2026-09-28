@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="CleanSpark 股价异动监控与智能归因控制台" />
+    <title>CLSK Signal Desk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="CLSK Signal Desk">
+          <span class="brand-mark">C<span>/</span>S</span>
+          <span><strong>SIGNAL DESK</strong><small>AGENTIC MARKET INTELLIGENCE</small></span>
+        </a>
+        <div class="market-clock">
+          <span class="status-dot"></span>
+          <span>系统在线</span>
+          <time id="clock">--:--:-- UTC</time>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div>
+            <p class="eyebrow">NASDAQ · CLSK / AUTOMATED WATCH</p>
+            <h1>看见异动。<br /><em>解释异动。</em></h1>
+            <p class="lede">追踪 CleanSpark 价格、比特币与矿企同业，把每一次异常波动转化为可核验的归因简报。</p>
+          </div>
+          <div class="hero-actions">
+            <button class="primary" id="run-live">运行实时监控 <span>↗</span></button>
+            <button class="secondary" id="run-demo">体验异动演示</button>
+            <p>实时运行遵循 5% 阈值与当日档位防抖策略</p>
+          </div>
+        </section>
+
+        <section class="stats-grid" aria-label="Agent 状态">
+          <article>
+            <span>监控标的</span><strong id="ticker">CLSK</strong><small>CleanSpark, Inc.</small>
+          </article>
+          <article>
+            <span>触发阈值</span><strong id="threshold">±5.0%</strong><small>日内相对前收</small>
+          </article>
+          <article>
+            <span>扫描频率</span><strong id="interval">15 MIN</strong><small>自动调度已启用</small>
+          </article>
+          <article>
+            <span>能力状态</span><strong id="capability">LOCAL</strong><small id="capability-note">规则归因 · 邮件预览</small>
+          </article>
+        </section>
+
+        <section class="workspace">
+          <article class="panel signal-panel">
+            <header>
+              <div><p class="eyebrow">LATEST SIGNAL</p><h2>最近一次监控</h2></div>
+              <span class="pill neutral" id="decision-pill">等待运行</span>
+            </header>
+            <div id="empty-state" class="empty-state">
+              <div class="radar"><i></i><i></i><span></span></div>
+              <h3>监控器待命</h3>
+              <p>运行实时监控，或用演示数据查看完整 Agent 工作流。</p>
+            </div>
+            <div id="result" class="result hidden">
+              <div class="quote-row">
+                <div><span>CLSK / USD</span><strong id="price">$—</strong></div>
+                <div class="change" id="change">—%</div>
+              </div>
+              <div class="peer-grid" id="peers"></div>
+              <div class="brief">
+                <div class="brief-meta">
+                  <span>AGENT BRIEF / 归因简报</span>
+                  <span id="email-state">PREVIEW</span>
+                </div>
+                <div id="brief-text"></div>
+              </div>
+            </div>
+          </article>
+
+          <aside class="panel flow-panel">
+            <header><p class="eyebrow">LANGGRAPH PIPELINE</p><h2>Agent 工作流</h2></header>
+            <ol>
+              <li class="active"><b>01</b><div><strong>行情采集</strong><span>CLSK · BTC · MARA · RIOT</span></div></li>
+              <li><b>02</b><div><strong>波动判定</strong><span>阈值与档位防抖</span></div></li>
+              <li><b>03</b><div><strong>催化剂检索</strong><span>公告 · SEC · 行业动态</span></div></li>
+              <li><b>04</b><div><strong>智能归因</strong><span>事实提炼与同业对照</span></div></li>
+              <li><b>05</b><div><strong>预警分发</strong><span>HTML / Plain Text 邮件</span></div></li>
+            </ol>
+            <div class="config-note">
+              <span>CONFIG</span>
+              <p id="config-note">正在读取服务配置…</p>
+            </div>
+          </aside>
+        </section>
+
+        <section class="panel history-panel">
+          <header><div><p class="eyebrow">RUN LEDGER</p><h2>监控记录</h2></div><button id="refresh" class="text-button">刷新记录 ↻</button></header>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>时间</th><th>模式</th><th>价格</th><th>波动</th><th>决策</th><th>分发</th></tr></thead>
+              <tbody id="history"><tr><td colspan="6" class="table-empty">暂无运行记录</td></tr></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+
+      <footer><span>CLSK SIGNAL DESK · v1.0</span><span>数据仅供参考，不构成投资建议</span></footer>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="/assets/app.js"></script>
+  </body>
+</html>
